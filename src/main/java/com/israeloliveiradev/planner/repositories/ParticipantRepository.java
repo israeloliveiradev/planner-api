@@ -9,5 +9,6 @@ import java.util.UUID;
 
 @Repository
 public interface ParticipantRepository extends JpaRepository<Participant, UUID> {
+
     public List<Participant> findAllByTripId(UUID tripId);
 }

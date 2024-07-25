@@ -24,6 +24,9 @@ public class Participant {
     @Column(nullable = false)
     private String name;
 
+    @Column(name = "is_confirmed", nullable = false)
+    private Boolean isConfirmed;
+
     @Email
     @Column(nullable = false)
     private String email;
@@ -31,4 +34,11 @@ public class Participant {
     @ManyToOne
     @JoinColumn(name = "trip_id", nullable = false)
     private Trip trip;
+
+    public Participant(String email, Trip trip) {
+        this.email = email;
+        this.trip = trip;
+        this.isConfirmed = false;
+        this.name = "";
+    }
 }
