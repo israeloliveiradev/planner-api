@@ -1,17 +1,17 @@
 package com.israeloliveiradev.planner.controller;
 
 
-import com.israeloliveiradev.planner.entities.Trip;
-import com.israeloliveiradev.planner.entities.TripCreateResponse;
-import com.israeloliveiradev.planner.entities.TripRequestPayLoad;
+import com.israeloliveiradev.planner.entities.*;
 import com.israeloliveiradev.planner.repositories.TripRepository;
 import com.israeloliveiradev.planner.services.ParticipantService;
+import jakarta.validation.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -103,4 +103,37 @@ public class TripController {
         return ResponseEntity.notFound().build();
     }
 
-}
+    @PostMapping("/{id}/invite")
+    public ResponseEntity<ParticipantCreateResponse> inviteParticipants(@PathVariable UUID id, @RequestBody ParticipantRequestPayLoad participantRequestPayLoad) {
+        Optional<Trip> trip = this.tripRepository.findById(id);
+
+        if (trip.isPresent()) {
+            Trip rawTrip = trip.get();
+
+            ParticipantCreateResponse participantResponse = this.participantService.addParticipantToEvent(participantRequestPayLoad.email(), rawTrip);
+
+            if (rawTrip.isConfirmed()) {
+                this.participantService.triggerConfirmationEmailToParticipant(participantRequestPayLoad.email());
+            }
+
+            return ResponseEntity.ok(participantResponse);
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/{id}/participants")
+    public ResponseEntity<List<ParticipantData>> getAllParticipants(@PathVariable UUID id) {
+        List<ParticipantData> participantList = this.participantService.getAllParticipantsFromEvent(id);
+
+
+        return ResponseEntity.ok(participantList);
+        }
+
+
+
+
+    }
+
+
+
