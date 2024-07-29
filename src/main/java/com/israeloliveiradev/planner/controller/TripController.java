@@ -6,6 +6,7 @@ import com.israeloliveiradev.planner.repositories.TripRepository;
 import com.israeloliveiradev.planner.services.ActivityService;
 import com.israeloliveiradev.planner.services.LinkService;
 import com.israeloliveiradev.planner.services.ParticipantService;
+import com.israeloliveiradev.planner.services.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,16 +35,20 @@ public class TripController {
     private LinkService linkService;
 
 
+    @Autowired
+    private TripService tripService;
+
+
     @GetMapping
     public ResponseEntity<List<Trip>> getAllTrips() {
-        return ResponseEntity.ok(this.tripRepository.findAll());
+        return this.tripService.getAllTrips();
+
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Trip> getTripDetails(@PathVariable UUID id) {
-        Optional<Trip> trip = this.tripRepository.findById(id);
 
-        return trip.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return this.tripService.getTripDetails(id);
     }
 
     @GetMapping("/destination/{destination}")
