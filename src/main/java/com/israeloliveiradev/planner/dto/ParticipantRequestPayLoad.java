@@ -1,4 +1,4 @@
-package com.israeloliveiradev.planner.entities;
+package com.israeloliveiradev.planner.dto;
 
 public record ParticipantRequestPayLoad(String name, String email) {
 }

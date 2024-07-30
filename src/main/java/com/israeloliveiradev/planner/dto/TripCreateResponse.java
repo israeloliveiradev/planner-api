@@ -1,7 +1,4 @@
-package com.israeloliveiradev.planner.entities;
-
-import lombok.Getter;
-import lombok.Setter;
+package com.israeloliveiradev.planner.dto;
 
 import java.util.UUID;
 

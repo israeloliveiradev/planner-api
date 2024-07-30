@@ -1,4 +1,4 @@
-package com.israeloliveiradev.planner.entities;
+package com.israeloliveiradev.planner.dto;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

@@ -1,6 +1,9 @@
 package com.israeloliveiradev.planner.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.israeloliveiradev.planner.dto.TripRequestPayLoad;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
@@ -23,7 +26,6 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-
     @Column(name = "destination", nullable = false)
     private String destination;
 
@@ -37,13 +39,17 @@ public class Trip {
     @Column(name = "is_confirmed", nullable = false)
     private boolean isConfirmed;
 
-
     @Column(name = "owner_name", nullable = false)
     private String ownerName;
 
+    @Schema(example = "email@email.com")
     @Email
     @Column(name = "owner_email", nullable = false)
     private String ownerEmail;
+
+    @ManyToOne
+    @JoinColumn(name = "username_id")
+    private Username username;
 
     public Trip(TripRequestPayLoad data){
         this.destination = data.destination();
@@ -52,6 +58,7 @@ public class Trip {
         this.ownerName = data.owner_name();
         this.startsAt = LocalDateTime.parse(data.starts_at(), DateTimeFormatter.ISO_DATE_TIME);
         this.endsAt = LocalDateTime.parse(data.ends_at(), DateTimeFormatter.ISO_DATE_TIME);
+
     }
 
 

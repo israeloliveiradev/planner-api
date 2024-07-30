@@ -1,6 +1,4 @@
-package com.israeloliveiradev.planner.entities;
-
-import java.util.UUID;
+package com.israeloliveiradev.planner.dto;
 
 public record ActivityRequestPayLoad(String title, String occurs_at) {
 }

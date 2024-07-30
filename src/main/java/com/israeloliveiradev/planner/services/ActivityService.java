@@ -1,5 +1,8 @@
 package com.israeloliveiradev.planner.services;
 
+import com.israeloliveiradev.planner.dto.ActivityCreateResponse;
+import com.israeloliveiradev.planner.dto.ActivityData;
+import com.israeloliveiradev.planner.dto.ActivityRequestPayLoad;
 import com.israeloliveiradev.planner.entities.*;
 import com.israeloliveiradev.planner.repositories.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;

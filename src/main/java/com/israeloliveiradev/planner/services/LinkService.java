@@ -1,5 +1,8 @@
 package com.israeloliveiradev.planner.services;
 
+import com.israeloliveiradev.planner.dto.LinkCreateResponse;
+import com.israeloliveiradev.planner.dto.LinkData;
+import com.israeloliveiradev.planner.dto.LinkRequestPayLoad;
 import com.israeloliveiradev.planner.entities.*;
 import com.israeloliveiradev.planner.repositories.LinkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
