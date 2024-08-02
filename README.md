@@ -6,10 +6,7 @@
 </p> -->
 
 <br/>
-<h1 align="center">
-    <img src="" alt="Logo" width="400"><br><br>
-    Planner API
-</h1>
+<h1 align="center">Planner API</h1>
 
 <div>
     <p align="center">
